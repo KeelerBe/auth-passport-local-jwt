@@ -1,4 +1,3 @@
-// controllers/authController.js
 const passport = require('passport')
 const mongoose = require('mongoose')
 const jwt = require('jsonwebtoken')
