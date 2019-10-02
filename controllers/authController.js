@@ -54,9 +54,13 @@ module.exports.register = (req, res, next) => {
 }
 
 module.exports.logout = (req, res, next) => {
-
+  req.logout()
+  res.send(true)
 }
 
-module.exports.user = (req, res, next) => {
-  
-}
+module.exports.user = [
+  passport.authenticate('jwt', { session: false }),
+  (req, res, next) => {
+    res.send(req.user)
+  }
+]
