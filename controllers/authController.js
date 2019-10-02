@@ -58,5 +58,5 @@ module.exports.logout = (req, res, next) => {
 }
 
 module.exports.user = (req, res, next) => {
-
+  
 }

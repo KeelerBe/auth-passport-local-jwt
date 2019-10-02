@@ -1,7 +1,10 @@
 // services/passport.js
 const passport = require('passport')
-const LocalStrategy = require('passport-local').Strategy
 const mongoose = require('mongoose')
+const LocalStrategy = require('passport-local').Strategy
+const passportJwt = require('passport-jwt')
+const JWTStrategy = passportJwt.Strategy
+const ExtractJwt = passportJwt.ExtractJwt
 
 const User = mongoose.model('users')
 
@@ -18,5 +21,17 @@ passport.use(new LocalStrategy({
 
       done(null, user)
     })
+  })
+}))
+
+passport.use(new JWTStrategy({
+  secretOrKey: process.env.JWT_KEY,
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken()
+}, (jwtPayload, done) => {
+  User.findById(jwtPayload, (err, user) => {
+    if (err) return done(err)
+    if (!user) return done(null, false)
+
+    done(null, user)
   })
 }))
