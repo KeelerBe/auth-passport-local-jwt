@@ -1,5 +1,8 @@
 const express = require('express')
+require('dotenv').config()
 require('colors')
+
+require('./models/User')
 
 const app = express()
 
