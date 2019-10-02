@@ -6,6 +6,7 @@ require('dotenv').config()
 require('colors')
 
 require('./models/User')
+require('./services/passport')
 const authRoutes = require('./routes/authRoutes')
 
 mongoose.connect('mongodb://localhost/auth-test', {
